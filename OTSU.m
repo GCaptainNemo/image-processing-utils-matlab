@@ -1,5 +1,7 @@
 grid = imread('grid.bmp');
+origingrid = grid;
 grayscale = otsu(grid);
+
 for i = 1:numel(grid)
     if grid(i) <= grayscale
         grid(i) = 0;
@@ -11,7 +13,10 @@ end
 % gray = graythresh(grid);
 % disp(gray);
 % grid = im2bw(grid, gray);
-imshow(grid);
+figure(1);
+subplot(121); imshow(origingrid); title('原图');
+subplot(122); imshow(grid); title('二值化后的图');
+
 
 function grayscale = otsu(img)
 totalNum = numel(img);
