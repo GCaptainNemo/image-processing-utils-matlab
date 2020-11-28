@@ -1,12 +1,13 @@
 lena = imread('lena.png');
-n = 2; 
-% zuijinlin_2 = zuijinlin(2, lena);
-% shuangxianxing_2 = shuangxianxing(2, lena);
-sanci_2 = sanci(2, lena);
+lena = imresize(lena, 1/ 6);
+n = 4; 
+zuijinlin_2 = zuijinlin(n, lena);
+shuangxianxing_2 = shuangxianxing(n, lena);
+sanci_2 = sanci(n, lena);
 figure(1);
-% subplot(131); imshow(zuijinlin_2); title('最近邻');
-% subplot(132); imshow(shuangxianxing_2); title('双线性');
-subplot(131); imshow(shuangxianxing_2); title('立方卷积');
+subplot(131); imshow(zuijinlin_2); title('最近邻');
+subplot(132); imshow(shuangxianxing_2); title('双线性');
+subplot(133); imshow(sanci_2); title('立方卷积');
 
 
 
@@ -14,14 +15,25 @@ subplot(131); imshow(shuangxianxing_2); title('立方卷积');
 
 
 function newphoto = zuijinlin(n, lena)
+[row, column, ~] = size(lena);
 size_ = size(lena);
 size_ = size_ .* [n ,n ,1];
 newphoto = uint8(zeros(size_));
 multiplier = 1 / n;
 for i = 1:size_(1)
+    oldrow = round(i * multiplier);    
+    if oldrow < 1
+        oldrow = 1;
+    elseif oldrow > row
+        oldrow = row;
+    end
     for j = 1:size_(2)
-        oldrow = round(i * multiplier);
-        oldcolumn = round(j * multiplier);
+        oldcolumn = round(j * multiplier);    
+        if oldcolumn< 1
+            oldcolumn = 1;
+        elseif oldcolumn > column
+            oldcolumn = column;
+        end
         newphoto(i, j, :) = lena(oldrow, oldcolumn, :);
     end
 end
@@ -36,22 +48,24 @@ size_ = size_lena .* [n ,n ,1];
 newphoto = zeros(size_);
 multiplier = 1 / n;
 for i = 1:size_(1)
-    for j = 1:size_(2)
-        point_row = i * multiplier; point_column = j * multiplier;
-        oldrow = floor(point_row); oldcolumn = floor(point_column);
-        proportion_row = point_row - oldrow; 
-        proportion_column = point_column - oldcolumn;
-        if oldrow == 0
+    point_row = i * multiplier;
+    oldrow = floor(point_row); 
+    proportion_row = point_row - oldrow;        
+    if oldrow == 0
             oldrow = 1;
-        elseif oldrow == size_lena(1);
-            oldrow = size_lena(1) - 1;
-        end
+    elseif oldrow == size_lena(1);
+        oldrow = size_lena(1) - 1;
+    end
+    for j = 1:size_(2)
+        point_column = j * multiplier;
+        oldcolumn = floor(point_column);
+        proportion_column = point_column - oldcolumn;
+        
         if oldcolumn == 0
             oldcolumn = 1;
         elseif oldcolumn == size_lena(2);
             oldcolumn = size_lena(2) - 1;
         end
-        
         newphoto(i, j, :) = ...
         lena(oldrow, oldcolumn, :) * (1 - proportion_row) * (1 - proportion_column) + ...
         lena(oldrow + 1, oldcolumn, :) * (proportion_row) * (1 - proportion_column)+  ...
@@ -71,27 +85,26 @@ newphoto = zeros(size_);
 multiplier = 1 / n;
 B = zeros(4, 4, 3);
 for i = 1:size_(1)
-    for j = 1:size_(2)
-        pointRow = i * multiplier;
-        pointColumn = j * multiplier;
-        
-        floorrow = floor(i * multiplier);
-        floorcolumn = floor(j * multiplier);
-        row_xiaoshu = pointRow - floorrow;
-        column_xiaoshu = pointColumn - floorcolumn;
-        A = [calculate_cubic(row_xiaoshu - 2) , calculate_cubic(row_xiaoshu - 1), ...
+    pointRow = i * multiplier;
+    floorrow = floor(i * multiplier);    
+    row_xiaoshu = pointRow - floorrow;
+    A = [calculate_cubic(row_xiaoshu - 2) , calculate_cubic(row_xiaoshu - 1), ...
             calculate_cubic(row_xiaoshu),calculate_cubic(row_xiaoshu + 1),];
+    if floorrow < 2
+        floorrow = 2;
+    elseif floorrow > size_lena(1) - 2
+        floorrow = size_lena(1) - 2;
+    end
+    for j = 1:size_(2)
+        pointColumn = j * multiplier;
+        floorcolumn = floor(j * multiplier);
+        column_xiaoshu = pointColumn - floorcolumn;
         C = [calculate_cubic(column_xiaoshu - 2), calculate_cubic(column_xiaoshu - 1), ...
             calculate_cubic(column_xiaoshu),calculate_cubic(column_xiaoshu + 1),];
         if floorcolumn < 2
             floorcolumn = 2;
         elseif floorcolumn > size_lena(2) - 2
             floorcolumn = size_lena(2) - 2;
-        end
-        if floorrow < 2
-            floorrow = 2;
-        elseif floorrow > size_lena(1) - 2
-            floorrow = size_lena(1) - 2;
         end
         for B_row = 1:4
             for B_column = 1:4

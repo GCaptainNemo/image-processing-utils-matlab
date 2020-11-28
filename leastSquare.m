@@ -1,8 +1,10 @@
 up = imread('up.jpg');
 down = imread('down.jpg');
-
-imshow(down);
-impixelinfo;
+figure(1);
+subplot(131); imshow(down); title('down.jpg');
+subplot(132); imshow(up); title('up.jpg');
+% 
+% impixelinfo;
 
 
 up_coordinate = [[99, 61]; [71, 141]; [252, 174]; [119, 312]; 
