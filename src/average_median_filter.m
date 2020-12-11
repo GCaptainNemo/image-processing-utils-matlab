@@ -1,4 +1,4 @@
-grid = imread('add_noise.jpg');
+grid = imread('../resources/add_noise.jpg');
 grid = rgb2gray(grid);
 % grid = imnoise(grid,'salt & pepper',0.02);
 grid = imnoise(grid,'gaussian');

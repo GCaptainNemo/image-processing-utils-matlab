@@ -1,8 +1,7 @@
-grid = imread('otsu.png');
+grid = imread('../resources/otsu.png');
 grid = rgb2gray(grid);
 origingrid = grid;
 grayscale = otsu(grid);
-
 for i = 1:numel(grid)
     if grid(i) <= grayscale
         grid(i) = 0;
@@ -11,13 +10,9 @@ for i = 1:numel(grid)
     end
 end
 
-% gray = graythresh(grid);
-% disp(gray);
-% grid = im2bw(grid, gray);
 figure(1);
 subplot(121); imshow(origingrid); title('原图');
 subplot(122); imshow(grid); title('大津阈值分割后的图像');
-
 
 function grayscale = otsu(img)
 totalNum = numel(img);

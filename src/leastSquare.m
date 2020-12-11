@@ -1,11 +1,10 @@
-up = imread('up.jpg');
-down = imread('down.jpg');
+up = imread('../resources/up.jpg');
+down = imread('../resources/down.jpg');
 figure(1);
 subplot(131); imshow(down); title('down.jpg');
 subplot(132); imshow(up); title('up.jpg');
 impixelinfo;
-
-
+% 注意：这里uv， xy对应的是图像矩阵的row和column
 % up uv
 up_coordinate = [62, 100; 141, 69; 178, 252; 301, 122; 
                 331, 326; 399, 382; 93, 510];
@@ -32,19 +31,9 @@ for u=1:row
         vector = [1, u, v, u*u, v*v, u*v];
         down_x = round(vector * x_star(:, 1)) ;
         down_y = round(vector *  x_star(:, 2));
-        
-        %y = k200+ k210u + k201v+ k220u2+ k202v2+ k211uv
         if(down_x >= 1 && down_x <= down_row && down_y >= 1 && down_y<= down_column)
-%             disp(x)
             transform_down(u, v, :) = down(down_x, down_y, :);    
         end
     end
 end
 subplot(133); imshow(uint8(transform_down)); title('transform down.jpg');
-
-
-
-
-
-
-

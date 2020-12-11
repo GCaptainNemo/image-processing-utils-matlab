@@ -1,4 +1,4 @@
-lena = imread('lena.png');
+lena = imread('../resources/lena.png');
 lena = imresize(lena, 1/ 6);
 n = 2; 
 zuijinlin_2 = zuijinlin(n, lena);
@@ -8,9 +8,6 @@ figure(1);
 subplot(131); imshow(zuijinlin_2); title('最近邻');
 subplot(132); imshow(shuangxianxing_2); title('双线性');
 subplot(133); imshow(sanci_2); title('立方卷积');
-
-
-
 
 
 
