@@ -1,6 +1,6 @@
 lena = imread('lena.png');
 lena = imresize(lena, 1/ 6);
-n = 4; 
+n = 2; 
 zuijinlin_2 = zuijinlin(n, lena);
 shuangxianxing_2 = shuangxianxing(n, lena);
 sanci_2 = sanci(n, lena);
@@ -53,7 +53,7 @@ for i = 1:size_(1)
     proportion_row = point_row - oldrow;        
     if oldrow == 0
             oldrow = 1;
-    elseif oldrow == size_lena(1);
+    elseif oldrow == size_lena(1)
         oldrow = size_lena(1) - 1;
     end
     for j = 1:size_(2)
@@ -63,9 +63,10 @@ for i = 1:size_(1)
         
         if oldcolumn == 0
             oldcolumn = 1;
-        elseif oldcolumn == size_lena(2);
+        elseif oldcolumn == size_lena(2)
             oldcolumn = size_lena(2) - 1;
         end
+       
         newphoto(i, j, :) = ...
         lena(oldrow, oldcolumn, :) * (1 - proportion_row) * (1 - proportion_column) + ...
         lena(oldrow + 1, oldcolumn, :) * (proportion_row) * (1 - proportion_column)+  ...

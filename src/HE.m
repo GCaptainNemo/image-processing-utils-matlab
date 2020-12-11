@@ -1,5 +1,6 @@
-grid = imread('grid.bmp');
-
+grid = imread('lena.png');
+% imshow(grid);
+grid = rgb2gray(grid);
 gridHE = Histogram_eq(grid);
 % gridHE2 = histeq(grid);
 figure(1)

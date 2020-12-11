@@ -1,4 +1,5 @@
-grid = imread('grid.bmp');
+grid = imread('otsu.png');
+grid = rgb2gray(grid);
 origingrid = grid;
 grayscale = otsu(grid);
 
@@ -15,7 +16,7 @@ end
 % grid = im2bw(grid, gray);
 figure(1);
 subplot(121); imshow(origingrid); title('原图');
-subplot(122); imshow(grid); title('二值化后的图');
+subplot(122); imshow(grid); title('大津阈值分割后的图像');
 
 
 function grayscale = otsu(img)
