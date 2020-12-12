@@ -2,17 +2,20 @@ grid = imread('../resources/add_noise.jpg');
 grid = rgb2gray(grid);
 grid = imnoise(grid,'salt & pepper',0.02);
 % grid = imnoise(grid,'gaussian');
-I_3 = temp('average',[3, 3]);%3*3均值滤波
-I_5 = temp('average',[5, 5]);%3*3均值滤波
-I_7 = temp('average',[7, 7]);%3*3均值滤波
-
+I_3 = temp('average',[3, 3]); %3*3均值滤波
+I_5 = temp('average',[5, 5]);
+I_7 = temp('average',[7, 7]);
 % med_3 = medfilt2(grid, [3, 3]);
+tic;
 med_3 = mymedian(grid, [3, 3]);
 med_5 = mymedian(grid, [5, 5]);
 med_7 = mymedian(grid, [7, 7]);
+toc;disp(['中值滤波运行时间: ',num2str(toc)]);
+tic;
 average_3 = myfilt(grid, I_3);
 average_5 = myfilt(grid, I_5);
 average_7 = myfilt(grid, I_7);
+toc;disp(['均值滤波运行时间: ',num2str(toc)]);
 
 
 figure(1);
