@@ -20,6 +20,7 @@ for n = 1:7
     A(n,1:6) = a;
 end
 x_star = inv(A'*A) * A' * b;
+error = norm(reshape(A*x_star - b, 14, 1)) ^2;
 % answer(4:6, 1) = 0;
 % answer(4:6, 2) = 0;
 
