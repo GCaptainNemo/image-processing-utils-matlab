@@ -22,7 +22,7 @@
 8. src/hough_transform.m
 
 ## 补充：
-1. [Matlab图像手动配准讲义](src/jupyter_notebook/registration.ipynb)
+1. Matlab图像手动配准讲义 (jupyter_notebook/registration.ipynb)
 
 
 
