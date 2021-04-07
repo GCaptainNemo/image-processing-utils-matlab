@@ -22,7 +22,14 @@
 8. src/hough_transform.m
 
 ## 补充：
-1. Matlab图像手动配准讲义 (jupyter_notebook/registration.ipynb)
+1. Matlab图像手动配准 (jupyter_notebook/registration.ipynb)
+2. Matlab水域分割 (jupyter_notebook/watershed.ipynb)
+
+## 参考资料
+[1] [watershed-CSDN](https://blog.csdn.net/u011583927/article/details/53413825)
+
+[2] [jupyter-notebook Matlab](https://blog.csdn.net/ZHzfzdr/article/details/86101205?utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromMachineLearnPai2%7Edefault-1.control&dist_request_id=1328769.80956.16177695400576005&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromMachineLearnPai2%7Edefault-1.control)
+
 
 
 
