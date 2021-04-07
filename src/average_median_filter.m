@@ -1,5 +1,7 @@
 grid = imread('../resources/add_noise.jpg');
 grid = rgb2gray(grid);
+
+
 grid = imnoise(grid,'salt & pepper',0.02);
 % grid = imnoise(grid,'gaussian');
 I_3 = temp('average',[3, 3]); %3*3¾ùÖµÂË²¨

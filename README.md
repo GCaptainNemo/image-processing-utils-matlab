@@ -1,5 +1,5 @@
 # 图像处理工具箱
-代码资源在src文件夹内，对应图像资源在resources文件内
+代码资源在src文件夹内，对应图像资源在resources文件内，代码上传至https://github.com/GCaptainNemo/image_processing_utils仓库，欢迎来fork
 ## 包括内容：
 1. 傅里叶变换去除波纹噪声
 2. 图像插值（最近邻、双线性、立方卷积）
